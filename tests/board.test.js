@@ -40,4 +40,24 @@ describe('board class', () => {
       expect(newBoard.checkRowsForWin()).toEqual(false)
     })
   })
+
+  describe('checkColumnsForWin method', () => {
+    test('returns true if all column elements are matching with x', () => {
+      newBoard.board[0][0] = cp.x
+      newBoard.board[1][0] = cp.x
+      newBoard.board[2][0] = cp.x
+      expect(newBoard.checkColumnsForWin()).toEqual(true)
+    })
+
+    test('returns true if all column elements are matching with o', () => {
+      newBoard.board[0][2] = cp.o
+      newBoard.board[1][2] = cp.o
+      newBoard.board[2][2] = cp.o
+      expect(newBoard.checkColumnsForWin()).toEqual(true)
+    })
+
+    test('returns false if column is in default state', () => {
+      expect(newBoard.checkColumnsForWin()).toEqual(false)
+    })
+  })
 })

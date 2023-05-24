@@ -27,6 +27,18 @@ class Board {
     }
     return false
   }
+
+  checkColumnsForWin = () => {
+    for (let i = 0; i <= 2; i++) {
+      if (
+        this.board[0][i] !== this.cp.d &&
+        this.board[0][i] === this.board[1][i] &&
+        this.board[1][i] === this.board[2][i]) {
+        return true
+      }
+    }
+    return false
+  }
 }
 
 module.exports = Board
