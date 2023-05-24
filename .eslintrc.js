@@ -6,7 +6,8 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'standard'
+    'standard',
+    "plugin:jest/recommended"
   ],
   overrides: [
   ],
@@ -14,7 +15,8 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   plugins: [
-    'react'
+    'react',
+    'jest'
   ],
   rules: {
   }
