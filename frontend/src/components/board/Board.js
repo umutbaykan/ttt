@@ -12,18 +12,18 @@ const Board = ({ xNext }) => {
   
   let symbol;
   if (xNext) {
-    symbol = 'X'    
+    symbol = 'x'    
   } else {
-    symbol = 'O'
+    symbol = 'o'
   }
 
   useEffect(() => {
     checkWins()
   }, [grid])
 
-  const handleGridChange = (gridKey, symbol) => {
+  const handleGridChange = (row, column, symbol) => {
     const newGrid = structuredClone(grid)
-    newGrid[gridKey] = symbol
+    newGrid[row][column] = symbol
     setGrid(newGrid)
   }
 
@@ -33,15 +33,13 @@ const Board = ({ xNext }) => {
 
   return (
     <>
-    {grid.forEach((value, index) => {
-       <div className="board-row">
-          {value.forEach(() => {
-            <Mark className='mark' gridKey={3} symbol={'X'} callback={handleGridChange}/>
-          })}
-       </div>
-    })}
-    
-    <Mark gridKey={3} symbol={'X'} callback={handleGridChange}/>
+    {grid.map((row, rowIndex) => (
+      <div key={rowIndex}>
+        {row.map((item, columnIndex) => (
+          <Mark key={`${rowIndex}-${columnIndex}`} row={rowIndex} column={columnIndex} symbol={'X'} callback={handleGridChange}/>
+        ))}
+      </div>
+    ))}
     </>
     )
 }
