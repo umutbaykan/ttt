@@ -3,7 +3,6 @@ class Game {
     this.board = board
     this.ui = ui
     this.xNext = true
-    this.gameGoingOn = true
     this.moveCount = 0
   }
 
@@ -11,11 +10,25 @@ class Game {
 
   }
 
+  whoseTurnIsIt = () => {
+    if (this.xNext) {
+      return this.board.cp.x
+    } else {
+      return this.board.cp.o
+    }
+  }
+
+  swapTurns = () => {
+    this.xNext = !this.xNext
+  }
+
   run = () => {
-    while (this.gameGoingOn) {
+    while (true) {
+      this.board.show()
       const row = this.ui.askInput('row')
       const column = this.ui.askInput('column')
-      console.log(row, column)
+      this.board.mark([row, column], this.whoseTurnIsIt())
+      this.board.show()
       break
     }
   }

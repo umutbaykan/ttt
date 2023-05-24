@@ -12,6 +12,12 @@ class Board {
     this.board[row][column] = symbol
   }
 
+  show = () => {
+    for (let i = 0; i <= 2; i++) {
+      console.log(this.board[i])
+    }
+  }
+
   checkWins = () => {
     if (this.checkRowsForWin() || this.checkColumnsForWin() || this.checkDiagonalsForWin()) {
       return true
