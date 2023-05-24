@@ -1,6 +1,7 @@
 class Game {
-  constructor (board) {
+  constructor (board, ui) {
     this.board = board
+    this.ui = ui
     this.xNext = true
     this.gameGoingOn = true
     this.moveCount = 0
@@ -12,7 +13,10 @@ class Game {
 
   run = () => {
     while (this.gameGoingOn) {
-      this.board.mark()
+      const row = this.ui.askInput('row')
+      const column = this.ui.askInput('column')
+      console.log(row, column)
+      break
     }
   }
 }

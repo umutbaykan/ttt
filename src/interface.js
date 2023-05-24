@@ -1,10 +1,10 @@
 const prompt = require('prompt-sync')()
 
-class Interface {
+class UserInterface {
   static askInput = (line) => {
     const result = prompt(`Which ${line}?`)
     return result
   }
 }
 
-module.exports = Interface
+module.exports = UserInterface
