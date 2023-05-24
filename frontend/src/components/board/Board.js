@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Mark from '../mark/Mark'
 import './Board.css'
 
 const Board = ({ xNext }) => {
 
   const [grid, setGrid] = useState([
-    ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '
+    [' ', ' ', ' '],
+    [' ', ' ', ' '],
+    [' ', ' ', ' ']
   ])
   
   let symbol;
@@ -15,16 +17,31 @@ const Board = ({ xNext }) => {
     symbol = 'O'
   }
 
+  useEffect(() => {
+    checkWins()
+  }, [grid])
+
   const handleGridChange = (gridKey, symbol) => {
     const newGrid = structuredClone(grid)
     newGrid[gridKey] = symbol
     setGrid(newGrid)
   }
 
+  const checkWins = () => {
+    
+  }
+
   return (
     <>
-    <Mark gridKey={0} symbol={'O'} callback={handleGridChange}/>
-    <Mark gridKey={1} symbol={'X'} callback={handleGridChange}/>
+    {grid.forEach((value, index) => {
+       <div className="board-row">
+          {value.forEach(() => {
+            <Mark className='mark' gridKey={3} symbol={'X'} callback={handleGridChange}/>
+          })}
+       </div>
+    })}
+    
+    <Mark gridKey={3} symbol={'X'} callback={handleGridChange}/>
     </>
     )
 }
