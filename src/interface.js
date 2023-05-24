@@ -2,7 +2,7 @@ const prompt = require('prompt-sync')()
 
 class UserInterface {
   static askInput = (line) => {
-    const result = prompt(`Which ${line}?`)
+    const result = prompt(`Which ${line}? `)
     return result
   }
 
@@ -12,6 +12,10 @@ class UserInterface {
     } else {
       console.log('O Wins')
     }
+  }
+
+  static occuppied = () => {
+    console.log('Cant place on existing mark')
   }
 }
 

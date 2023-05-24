@@ -6,10 +6,6 @@ class Game {
     this.moveCount = 0
   }
 
-  game = () => {
-
-  }
-
   whoseTurnIsIt = () => {
     if (this.xNext) {
       return this.board.cp.x
@@ -25,9 +21,15 @@ class Game {
   run = () => {
     while (this.moveCount < 9) {
       this.board.show()
-      const row = this.ui.askInput('row')
-      const column = this.ui.askInput('column')
-      this.board.mark([row, column], this.whoseTurnIsIt())
+      while (true) {
+        const row = this.ui.askInput('row')
+        const column = this.ui.askInput('column')
+        if (this.board.mark([row, column], this.whoseTurnIsIt())) {
+          break
+        } else {
+          this.ui.occuppied()
+        }
+      }
       if (this.board.checkWins()) {
         this.board.show()
         this.ui.victoryMessage(this.xNext)
