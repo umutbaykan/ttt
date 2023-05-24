@@ -23,14 +23,21 @@ class Game {
   }
 
   run = () => {
-    while (true) {
+    while (this.moveCount < 9) {
       this.board.show()
       const row = this.ui.askInput('row')
       const column = this.ui.askInput('column')
       this.board.mark([row, column], this.whoseTurnIsIt())
-      this.board.show()
-      break
+      if (this.board.checkWins()) {
+        this.board.show()
+        this.ui.victoryMessage(this.xNext)
+        return
+      } else {
+        this.swapTurns()
+        this.moveCount += 1
+      }
     }
+    console.log('It is a draw!')
   }
 }
 

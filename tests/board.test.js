@@ -16,13 +16,40 @@ describe('board class', () => {
     ])
   })
 
-  test('can change the component symbol', () => {
-    newBoard.mark([0, 2], cp.x)
-    expect(newBoard.board).toEqual([
-      [' ', ' ', 'X'],
-      [' ', ' ', ' '],
-      [' ', ' ', ' ']
-    ])
+  describe('mark method', () => {
+    test('returns false if spot is already occuppied', () => {
+      newBoard.board[0][0] = cp.x
+      expect(newBoard.mark([0, 0], cp.x)).toBe(false)
+    })
+
+    test('can change the component symbol', () => {
+      newBoard.mark([0, 2], cp.x)
+      expect(newBoard.board).toEqual([
+        [' ', ' ', 'X'],
+        [' ', ' ', ' '],
+        [' ', ' ', ' ']
+      ])
+    })
+
+    test('returns true if spot is changed', () => {
+      expect(newBoard.mark([0, 2], cp.x)).toBe(true)
+    })
+  })
+
+  describe('isOccuppied method', () => {
+    test('returns true if there is an existing x there', () => {
+      newBoard.board[0][0] = cp.x
+      expect(newBoard.isOccuppied(0, 0)).toEqual(true)
+    })
+
+    test('returns true if there is an existing o there', () => {
+      newBoard.board[0][0] = cp.o
+      expect(newBoard.isOccuppied(0, 0)).toEqual(true)
+    })
+
+    test('returns false if there is a default mark there', () => {
+      expect(newBoard.isOccuppied(0, 0)).toEqual(false)
+    })
   })
 
   describe('checkRowsForWin method', () => {

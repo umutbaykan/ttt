@@ -9,7 +9,20 @@ class Board {
   }
 
   mark = ([row, column], symbol) => {
-    this.board[row][column] = symbol
+    if (this.isOccuppied(row, column)) {
+      return false
+    } else {
+      this.board[row][column] = symbol
+      return true
+    }
+  }
+
+  isOccuppied = (row, column) => {
+    if (this.board[row][column] !== this.cp.d) {
+      return true
+    } else {
+      return false
+    }
   }
 
   show = () => {
