@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Mark from '../mark/Mark'
 import './Board.css'
 
-const Board = ({ xNext, changeTurn }) => {
+const Board = ({ xNext, changeTurn, gameWon }) => {
   const [grid, setGrid] = useState([
     [' ', ' ', ' '],
     [' ', ' ', ' '],
@@ -18,7 +18,7 @@ const Board = ({ xNext, changeTurn }) => {
 
   useEffect(() => {
     if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()) {
-      console.log("game is won")
+      gameWon()
     } 
   }, [grid])
 
