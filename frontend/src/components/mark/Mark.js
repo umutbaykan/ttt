@@ -1,20 +1,15 @@
 import { useState } from 'react';
 import './Mark.css'
 
-const Mark = ({xNext}) => {
+const Mark = ({symbol, callback, gridKey}) => {
 
   const [mark, setMark] = useState(' ')
-  let symbol;
-  
-  if (xNext) {
-    symbol = 'X'    
-  } else {
-    symbol = 'O'
-  }
 
   const handleMarkPress = () => {
     if (mark === ' ') {
-    setMark(symbol) } else {
+    setMark(symbol) 
+    callback(gridKey, symbol)
+    } else {
       return
     }
   }
