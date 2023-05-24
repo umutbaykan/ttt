@@ -6,6 +6,7 @@ function App() {
 
   const [xNext, setxNext] = useState(true)
   const [gameOngoing, setGameOngoing] = useState(true)
+  const [won, setWon] = useState(false)
 
   const whoseTurnIsIt = () => {
     if (xNext) {
@@ -21,6 +22,12 @@ function App() {
 
   const gameWon = () => {
     changeTurn()
+    setWon(true)
+    setGameOngoing(!gameOngoing)
+  }
+
+  const gameDraw = () => {
+    setWon(false)
     setGameOngoing(!gameOngoing)
   }
 
@@ -34,13 +41,19 @@ function App() {
     {gameOngoing ? 
       <>
       <h4>It is currently {whoseTurnIsIt()} turn</h4>
-      <Board changeTurn={changeTurn} xNext={xNext} gameWon={gameWon}/> 
+      <Board changeTurn={changeTurn} xNext={xNext} gameWon={gameWon} gameDraw={gameDraw}/> 
       </>
       :
-      <>
-      <h2>{whoseTurnIsIt()} won!</h2>
-      <button onClick={restartGame}>Replay?</button>
-      </>
+        won ? 
+        <>
+        <h2>{whoseTurnIsIt()} won!</h2>
+        <button onClick={restartGame}>Replay?</button>
+        </>
+        :
+        <>
+        <h2>A draw!</h2>
+        <button onClick={restartGame}>Replay?</button>
+        </>
     }
     </>
   );

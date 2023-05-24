@@ -2,30 +2,28 @@ import { useState, useEffect } from 'react';
 import Mark from '../mark/Mark'
 import './Board.css'
 
-const Board = ({ xNext, changeTurn, gameWon }) => {
+const Board = ({ xNext, changeTurn, gameWon, gameDraw }) => {
+  
+  const [movesMade, setMovesMade] = useState(0)
   const [grid, setGrid] = useState([
     [' ', ' ', ' '],
     [' ', ' ', ' '],
     [' ', ' ', ' ']
   ])
   
-  let symbol;
-  if (xNext) {
-    symbol = 'X'    
-  } else {
-    symbol = 'O'
-  }
-
   useEffect(() => {
     if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()) {
       gameWon()
-    } 
+    } else if (movesMade === 9) {
+      gameDraw()
+    }
   }, [grid])
 
   const handleGridChange = (row, column, symbol) => {
     const newGrid = structuredClone(grid)
     newGrid[row][column] = symbol
     setGrid(newGrid)
+    setMovesMade(movesMade + 1)
     changeTurn()
   }
 
@@ -73,7 +71,7 @@ const Board = ({ xNext, changeTurn, gameWon }) => {
     {grid.map((row, rowIndex) => (
       <div className='container' key={rowIndex}>
         {row.map((item, columnIndex) => (
-          <Mark key={`${rowIndex}-${columnIndex}`} row={rowIndex} column={columnIndex} symbol={symbol} callback={handleGridChange}/>
+          <Mark key={`${rowIndex}-${columnIndex}`} row={rowIndex} column={columnIndex} symbol={xNext ? 'X' : 'O'} callback={handleGridChange}/>
         ))}
       </div>
     ))}
