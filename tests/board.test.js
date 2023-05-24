@@ -60,4 +60,31 @@ describe('board class', () => {
       expect(newBoard.checkColumnsForWin()).toEqual(false)
     })
   })
+
+  describe('checkDiagonalsForWin method', () => {
+    test('returns true if diagonals are matching with x', () => {
+      newBoard.board[0][0] = cp.x
+      newBoard.board[1][1] = cp.x
+      newBoard.board[2][2] = cp.x
+      expect(newBoard.checkDiagonalsForWin()).toEqual(true)
+    })
+
+    test('returns true if diagonals are matching with o', () => {
+      newBoard.board[2][0] = cp.o
+      newBoard.board[1][1] = cp.o
+      newBoard.board[0][2] = cp.o
+      expect(newBoard.checkDiagonalsForWin()).toEqual(true)
+    })
+
+    test('returns false if diagonal is in default state', () => {
+      expect(newBoard.checkDiagonalsForWin()).toEqual(false)
+    })
+
+    test('returns false if diagonals are occupied but not matching', () => {
+      newBoard.board[2][0] = cp.o
+      newBoard.board[1][1] = cp.o
+      newBoard.board[0][2] = cp.x
+      expect(newBoard.checkDiagonalsForWin()).toEqual(false)
+    })
+  })
 })

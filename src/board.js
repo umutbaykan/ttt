@@ -39,6 +39,21 @@ class Board {
     }
     return false
   }
+
+  checkDiagonalsForWin = () => {
+    if ((
+      this.board[1][1] !== this.cp.d &&
+      this.board[1][1] === this.board[0][0] &&
+      this.board[1][1] === this.board[2][2]) ||
+    (
+      this.board[1][1] !== this.cp.d &&
+      this.board[1][1] === this.board[0][2] &&
+      this.board[1][1] === this.board[2][0])
+    ) {
+      return true
+    }
+    return false
+  }
 }
 
 module.exports = Board
