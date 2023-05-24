@@ -7,7 +7,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'standard',
-    "plugin:jest/recommended"
+    'plugin:jest/recommended'
   ],
   overrides: [
   ],

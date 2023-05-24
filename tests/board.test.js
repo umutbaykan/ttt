@@ -87,4 +87,42 @@ describe('board class', () => {
       expect(newBoard.checkDiagonalsForWin()).toEqual(false)
     })
   })
+
+  describe('checkWins method', () => {
+    test('returns true with a full row match of x', () => {
+      newBoard.board = [
+        [cp.x, cp.o, cp.x],
+        [cp.x, cp.x, cp.x],
+        [cp.o, cp.x, cp.o]
+      ]
+      expect(newBoard.checkWins()).toEqual(true)
+    })
+
+    test('returns false with a full row of mismatches', () => {
+      newBoard.board = [
+        [cp.x, cp.x, cp.o],
+        [cp.o, cp.x, cp.x],
+        [cp.x, cp.o, cp.o]
+      ]
+      expect(newBoard.checkWins()).toEqual(false)
+    })
+
+    test('returns true with a full column match of o', () => {
+      newBoard.board = [
+        [cp.x, cp.x, cp.o],
+        [cp.o, cp.x, cp.x],
+        [cp.o, cp.x, cp.o]
+      ]
+      expect(newBoard.checkWins()).toEqual(true)
+    })
+
+    test('returns false with a diagonal mismatch with defaults in', () => {
+      newBoard.board = [
+        [cp.x, cp.x, cp.d],
+        [cp.o, cp.x, cp.x],
+        [cp.d, cp.d, cp.o]
+      ]
+      expect(newBoard.checkWins()).toEqual(false)
+    })
+  })
 })

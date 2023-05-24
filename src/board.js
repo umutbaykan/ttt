@@ -13,7 +13,10 @@ class Board {
   }
 
   checkWins = () => {
-   
+    if (this.checkRowsForWin() || this.checkColumnsForWin() || this.checkDiagonalsForWin()) {
+      return true
+    }
+    return false
   }
 
   checkRowsForWin = () => {
