@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Mark from '../mark/Mark'
 import './Board.css'
 
-const Board = ({ xNext }) => {
+const Board = ({ xNext, changeTurn }) => {
   const [grid, setGrid] = useState([
     [' ', ' ', ' '],
     [' ', ' ', ' '],
@@ -26,6 +26,7 @@ const Board = ({ xNext }) => {
     const newGrid = structuredClone(grid)
     newGrid[row][column] = symbol
     setGrid(newGrid)
+    changeTurn()
   }
 
   const checkRowsForWin = () => {
@@ -70,7 +71,7 @@ const Board = ({ xNext }) => {
   return (
     <>
     {grid.map((row, rowIndex) => (
-      <div key={rowIndex}>
+      <div className='container' key={rowIndex}>
         {row.map((item, columnIndex) => (
           <Mark key={`${rowIndex}-${columnIndex}`} row={rowIndex} column={columnIndex} symbol={symbol} callback={handleGridChange}/>
         ))}
