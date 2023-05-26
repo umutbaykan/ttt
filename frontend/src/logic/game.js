@@ -1,7 +1,6 @@
 class Game {
-  constructor (board, ui) {
+  constructor (board) {
     this.board = board
-    this.ui = ui
     this.xNext = true
   }
 

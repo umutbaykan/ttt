@@ -1,24 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import Mark from './components/mark/Mark'
+const Game = require('./logic/game')
+const Board = require('./logic/board')
 
-function App() {
+const App = () => {
+
+  const game = new Game(new Board())
+  const [board, setBoard] = [game.board]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+   <h1>OMGHAI</h1>
+   {/* <Mark key={`${rowIndex}-${columnIndex}`} row={rowIndex} column={columnIndex} symbol={xNext ? 'X' : 'O'} callback={handleGridChange}/> */}
+   <Mark row={1} column={1} symbol={'X'} callback={console.log('clicky clicky')}/>
+    {console.log(board)}
+   </>
   );
 }
 
