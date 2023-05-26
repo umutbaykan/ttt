@@ -26,6 +26,15 @@ class Board {
     }
   };
 
+  reset = () => {
+    this.board = [
+      [" ", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "],
+    ];
+    this.moveCount = 0
+  }
+
   getBoard = () => {
     return this.board
   }

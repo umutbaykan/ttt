@@ -15,6 +15,11 @@ class Game {
   swapTurns = () => {
     this.xNext = !this.xNext
   }
+
+  refresh = () => {
+    this.xNext = true
+    this.board.reset()
+  }
 }
 
 module.exports = Game

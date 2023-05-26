@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-
+import { useEffect, useState } from "react";
 import "./App.css";
 import Mark from "./components/mark/Mark";
 const Game = require("./logic/game");
@@ -7,44 +6,70 @@ const Board = require("./logic/board");
 const game = new Game(new Board());
 
 const App = () => {
-  const [board, setBoard] = useState(game.board.board);
-  const [turn, setTurn] = useState(game.whoseTurnIsIt())
-  const [gameOver, setGameOver] = useState(false)
-  const [win, setWin] = useState(false)
-  const [draw, setDraw] = useState(false)
-  
+  const [turn, setTurn] = useState(game.whoseTurnIsIt());
+  const [gameOngoing, setGameOngoing] = useState(true);
+  const [win, setWin] = useState(false);
+
   const mark = (row, column, symbol) => {
-    game.board.mark([row, column], symbol)
-    game.swapTurns()
-    setTurn(game.whoseTurnIsIt())
-  }
+    game.board.mark([row, column], symbol);
+    game.swapTurns();
+    setTurn(game.whoseTurnIsIt());
+  };
+
+  const restartGame = () => {
+    game.refresh();
+    setGameOngoing(true);
+    setWin(false);
+    setTurn(game.whoseTurnIsIt());
+  };
+
+  const winner = () => {
+    if (turn === 'X') {
+      return "O";
+    } else {
+      return "X";
+    }
+  };
 
   useEffect(() => {
     if (game.board.checkWins()) {
-      setGameOver(true)
-      setWin(true)
+      setGameOngoing(false);
+      setWin(true);
     } else if (game.board.checkDraw()) {
-      setGameOver(true)
-      setDraw(true)
+      setGameOngoing(false);
     }
-  }, [turn])
+  }, [turn]);
 
   return (
     <>
-      <h1>OMGHAI</h1>
-      {game.board.getBoard().map((row, rowIndex) => (
-        <div className="container" key={rowIndex}>
-          {row.map((_, columnIndex) => (
-            <Mark
-              key={`${rowIndex}-${columnIndex}`}
-              row={rowIndex}
-              column={columnIndex}
-              symbol={turn}
-              callback={mark}
-            />
+      {gameOngoing ? (
+        <>
+          <h4>It is currently {turn} turn</h4>
+          {game.board.getBoard().map((row, rowIndex) => (
+            <div className="container" key={rowIndex}>
+              {row.map((_, columnIndex) => (
+                <Mark
+                  key={`${rowIndex}-${columnIndex}`}
+                  row={rowIndex}
+                  column={columnIndex}
+                  symbol={turn}
+                  callback={mark}
+                />
+              ))}
+            </div>
           ))}
-        </div>
-      ))}
+        </>
+      ) : win ? (
+        <>
+          <h2>{winner()} won!</h2>
+          <button onClick={restartGame}>Replay?</button>
+        </>
+      ) : (
+        <>
+          <h2>A draw!</h2>
+          <button onClick={restartGame}>Replay?</button>
+        </>
+      )}
     </>
   );
 };
