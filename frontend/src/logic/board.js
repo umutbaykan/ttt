@@ -32,7 +32,7 @@ class Board {
     }
   };
 
-  board = () => {
+  getBoard = () => {
     return this.board
   }
 
