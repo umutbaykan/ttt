@@ -26,12 +26,6 @@ class Board {
     }
   };
 
-  show = () => {
-    for (let i = 0; i <= 2; i++) {
-      console.log(this.board[i]);
-    }
-  };
-
   getBoard = () => {
     return this.board
   }

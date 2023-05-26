@@ -8,7 +8,7 @@ const Mark = ({symbol, callback, row, column}) => {
   const handleMarkPress = () => {
     if (mark === ' ') {
     setMark(symbol) 
-    // callback(row, column, symbol)
+    callback(row, column, symbol)
     } else {
       return
     }

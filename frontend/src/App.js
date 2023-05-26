@@ -1,4 +1,6 @@
 import logo from "./logo.svg";
+import { useEffect, useState } from 'react';
+
 import "./App.css";
 import Mark from "./components/mark/Mark";
 const Game = require("./logic/game");
@@ -6,7 +8,11 @@ const Board = require("./logic/board");
 
 const App = () => {
   const game = new Game(new Board());
-  const [board, setBoard] = [game.board];
+  const [board, setBoard] = useState(game.board);
+  
+  const mark = (row, column, symbol) => {
+    game.board.mark([row, column], symbol)
+  }
 
   return (
     <>
@@ -19,7 +25,7 @@ const App = () => {
               row={rowIndex}
               column={columnIndex}
               symbol={"X"}
-              callback={1}
+              callback={mark}
             />
           ))}
         </div>
